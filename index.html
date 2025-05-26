@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>KrisCake Bento Тортики</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; background: #fffafc; }
+        h1 { color: #e07fa7; }
+        section { margin: 40px 0; }
+        img { width: 300px; border-radius: 10px; }
+        form { margin-top: 40px; }
+        input, select, textarea {
+            display: block;
+            margin: 10px auto;
+            padding: 10px;
+            width: 80%;
+            max-width: 400px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+        }
+        button {
+            background: #e07fa7;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>🍰 KrisCake Bento Тортики 🍰</h1>
+
+    <section>
+        <h2>Бенто 500г</h2>
+        <img src="images/bento_500g.jpg" alt="Бенто 500г">
+    </section>
+
+    <section>
+        <h2>Бенто 1кг</h2>
+        <img src="images/bento_1kg.jpg" alt="Бенто 1кг">
+    </section>
+
+    <section>
+        <h2>Bento to go</h2>
+        <img src="images/bento_to_go.jpg" alt="Bento to go">
+    </section>
+
+    <form onsubmit="return sendMessage(event)">
+        <input type="text" id="name" placeholder="Ваше ім’я" required>
+        <input type="tel" id="phone" placeholder="Номер телефону" required>
+        <select id="category" required>
+            <option value="">Оберіть категорію</option>
+            <option>Бенто 500г</option>
+            <option>Бенто 1кг</option>
+            <option>Bento to go</option>
+        </select>
+        <select id="flavor" required>
+            <option value="">Оберіть начинку</option>
+            <option>Малина</option>
+            <option>Банан карамель</option>
+            <option>Снікерс</option>
+            <option>Орео</option>
+            <option>Манго-маракуйя</option>
+            <option>Вишня-кокос</option>
+            <option>Нутелла-фундук</option>
+        </select>
+        <textarea id="comment" placeholder="Коментар або побажання"></textarea>
+        <button type="submit">Надіслати замовлення</button>
+    </form>
+
+    <p>Зв’язок: <a href="https://t.me/kriscake_lviv">@kriscake_lviv</a></p>
+
+    <script>
+        function sendMessage(event) {
+            event.preventDefault();
+            const name = document.getElementById('name').value;
+            const phone = document.getElementById('phone').value;
+            const category = document.getElementById('category').value;
+            const flavor = document.getElementById('flavor').value;
+            const comment = document.getElementById('comment').value;
+
+            const message = `🍰 НОВЕ ЗАМОВЛЕННЯ:
+Ім’я: ${name}
+Телефон: ${phone}
+Категорія: ${category}
+Начинка: ${flavor}
+Коментар: ${comment}`;
+            const url = `https://api.telegram.org/bot<YOUR_BOT_TOKEN>/sendMessage?chat_id=<YOUR_CHAT_ID>&text=${encodeURIComponent(message)}`;
+
+            window.open(url);
+            return false;
+        }
+    </script>
+</body>
+</html>
